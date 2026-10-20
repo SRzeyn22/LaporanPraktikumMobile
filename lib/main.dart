@@ -1,23 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:modulAll/modul1/modul1.dart';
-import 'package:modulAll/modul10/practikum/modul10prac.dart';
-import 'package:modulAll/modul12/modul12.dart';
-import 'package:modulAll/modul14/main14.dart';
-import 'package:modulAll/modul2/modul2.dart';
-import 'package:modulAll/modul3/modul3.dart';
-import 'package:modulAll/modul4/modul4.dart';
-import 'package:modulAll/modul5/modul5.dart';
-import 'package:modulAll/modul5/tugasmodul5.dart';
-import 'package:modulAll/modul6/modul6.dart';
-import 'package:modulAll/modul7/modul7.dart';
-import 'package:modulAll/modul7/tujuan.dart';
-import 'package:modulAll/modul8/Practikum/home.dart';
-import 'package:modulAll/modul8/Practikum/tujuan.dart';
-import 'package:modulAll/modul8/home.dart';
-import 'package:modulAll/modul8/tujuan.dart';
-import 'package:modulAll/modul9/practikum/modul9practikum.dart';
-import 'package:modulAll/modul9/practikum/modul9practikum2.dart';
-import 'package:modulAll/modul9/tugas/modul9tugas.dart';
+import 'Modul-2/Tugas/code.dart' as m1;
+import 'Modul-3/Praktikum/praktikum.dart' as m2;
+import 'Modul-3/Tugas/code.dart' as m3;
+import 'Modul-4/Praktikum/Percobaan-1%20Flexible.dart' as m4;
+import 'Modul-4/Praktikum/Percobaan-1/Percobaan-1%20Flexible.dart' as m5;
+import 'Modul-4/Praktikum/Percobaan-2/Percobaan-2%20Expanded.dart' as m6;
+import 'Modul-4/Tugas/Tugas.dart' as m8;
+import 'Modul-5/Praktikum/Percobaan-1/Percobaan-1.dart' as m9;
+import 'Modul-5/Praktikum/Percobaan-2/Percobaan-2%20Spacer.dart' as m10;
+import 'Modul-5/Praktikum/Percobaan-3/Percobaan-3.dart' as m11;
+import 'Modul-5/Tugas/Tugas.dart' as m12;
+import 'Modul-6/Praktikum/Percobaan-1/Percobaan-1%20GridView.dart' as m13;
+import 'Modul-6/Praktikum/Percobaan-2/Percobaan-2%20ListView.dart' as m14;
+import 'Modul-6/Praktikum/Percobaan-3/Percobaan-3%20GridView.Builder.dart'
+    as m15;
+import 'Modul-6/Praktikum/Percobaan-4/Percobaan-4%20ListView.builder.dart'
+    as m16;
+import 'Modul-6/Tugas/Tugas.dart' as m18;
+import 'Modul-7/Tugas/main.dart' as m19;
+import 'Modul-8/Praktikum/main.dart' as m20;
+import 'Modul-8/Tugas/main.dart' as m21;
+import 'Modul-9/Praktikum/Percobaan-1/main.dart' as m22;
+import 'Modul-9/Praktikum/Percobaan-2/main.dart' as m23;
+import 'Modul-9/Tugas/tugas.dart' as m24;
+import 'Modul-10%20(Game)/Praktikum/Percobaan-1/main.dart' as m25;
+import 'Modul-10%20(Game)/Praktikum/Percobaan-2/main.dart' as m26;
+import 'Modul-10%20(Game)/Tugas/main.dart' as m27;
+import 'Modul-11/Tugas/main.dart' as m28;
+import 'UTS/main.dart ' as m31;
 
 void main() {
   runApp(const MyApp());
@@ -28,20 +38,44 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Tugas Flutter',
-      initialRoute: '/', // set halaman awal
-      routes: {
-        '/': (context) => HomePage(), // halaman utama
-        '/modul7': (context) => Modul7(), // contoh route langsung ke Modul7
-        '/tujuan': (context) => const TujuanPage(),
-        '/modul8': (context) => const HomeModul8(),
-        '/modul6': (context) => const Modul6(),
-        TujuanModul8.routeName: (context) => const TujuanModul8(),
-        '/modul8practikum': (context) => const Homemodul8practikum(),
-        Tujuanmodul8practikum.routeName: (context) =>
-            const Tujuanmodul8practikum(),
-      },
+    return MaterialApp(title: 'Tugas Flutter', home: const HomePage());
+  }
+}
+
+// Membuka salah satu hasil modul. Tombol kembali melayang di kiri bawah
+// supaya bisa kembali ke menu tanpa mengubah kode modul yang dibuka.
+void _bukaModul(BuildContext context, Widget modul) {
+  Navigator.of(
+    context,
+  ).push(MaterialPageRoute(builder: (context) => _ModulHost(modul: modul)));
+}
+
+class _ModulHost extends StatelessWidget {
+  const _ModulHost({required this.modul});
+
+  final Widget modul;
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      fit: StackFit.expand,
+      children: [
+        modul,
+        Positioned(
+          left: 8,
+          bottom: 8,
+          child: SafeArea(
+            child: Material(
+              type: MaterialType.transparency,
+              child: FloatingActionButton.small(
+                heroTag: null,
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Icon(Icons.arrow_back),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -55,163 +89,205 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(title: const Text('Menu Modul')),
       body: ListView(
         children: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Modul1Page()),
-              );
-            },
-            child: const Text('Modul 1'),
+          ExpansionTile(
+            title: const Text('Modul 2'),
+            childrenPadding: const EdgeInsets.only(left: 16),
+            children: [
+              ListTile(
+                title: const Text('Tugas'),
+                onTap: () => _bukaModul(context, m1.MyApp()),
+              ),
+            ],
           ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Modul2Page()),
-              );
-            },
-            child: const Text('Modul 2'),
+          ExpansionTile(
+            title: const Text('Modul 3'),
+            childrenPadding: const EdgeInsets.only(left: 16),
+            children: [
+              ListTile(
+                title: const Text('Praktikum'),
+                onTap: () => _bukaModul(context, m2.MyApp()),
+              ),
+              ListTile(
+                title: const Text('Tugas'),
+                onTap: () => _bukaModul(context, m3.MyApp()),
+              ),
+            ],
           ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Modul3Page()),
-              );
-            },
-            child: const Text('Modul 3'),
+          ExpansionTile(
+            title: const Text('Modul 4'),
+            childrenPadding: const EdgeInsets.only(left: 16),
+            children: [
+              ExpansionTile(
+                title: const Text('Praktikum'),
+                childrenPadding: const EdgeInsets.only(left: 16),
+                children: [
+                  ListTile(
+                    title: const Text('Percobaan-1'),
+                    onTap: () => _bukaModul(context, m5.MyApp()),
+                  ),
+                  ListTile(
+                    title: const Text('Percobaan-2'),
+                    onTap: () => _bukaModul(context, m6.MyApp()),
+                  ),
+                ],
+              ),
+              ListTile(
+                title: const Text('Tugas'),
+                onTap: () => _bukaModul(context, m8.MyApp()),
+              ),
+            ],
           ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Modul4Page()),
-              );
-            },
-            child: const Text('Modul 4'),
+          ExpansionTile(
+            title: const Text('Modul 5'),
+            childrenPadding: const EdgeInsets.only(left: 16),
+            children: [
+              ExpansionTile(
+                title: const Text('Praktikum'),
+                childrenPadding: const EdgeInsets.only(left: 16),
+                children: [
+                  ListTile(
+                    title: const Text('Percobaan-1'),
+                    onTap: () => _bukaModul(context, m9.MyApp()),
+                  ),
+                  ListTile(
+                    title: const Text('Percobaan-2'),
+                    onTap: () => _bukaModul(context, m10.MyApp()),
+                  ),
+                  ListTile(
+                    title: const Text('Percobaan-3'),
+                    onTap: () => _bukaModul(context, m11.MyApp()),
+                  ),
+                ],
+              ),
+              ListTile(
+                title: const Text('Tugas'),
+                onTap: () => _bukaModul(context, m12.MyApp()),
+              ),
+            ],
           ),
-          const SizedBox(height: 16),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => modul5()),
-              );
-            },
-            child: const Text('Modul 5'),
+          ExpansionTile(
+            title: const Text('Modul 6'),
+            childrenPadding: const EdgeInsets.only(left: 16),
+            children: [
+              ExpansionTile(
+                title: const Text('Praktikum'),
+                childrenPadding: const EdgeInsets.only(left: 16),
+                children: [
+                  ListTile(
+                    title: const Text('Percobaan-1'),
+                    onTap: () => _bukaModul(context, m13.MyApp()),
+                  ),
+                  ListTile(
+                    title: const Text('Percobaan-2'),
+                    onTap: () => _bukaModul(context, m14.MyApp()),
+                  ),
+                  ListTile(
+                    title: const Text('Percobaan-3'),
+                    onTap: () => _bukaModul(context, m15.MyApp()),
+                  ),
+                  ListTile(
+                    title: const Text('Percobaan-4'),
+                    onTap: () => _bukaModul(context, m16.MyApp()),
+                  ),
+                ],
+              ),
+              ListTile(
+                title: const Text('Tugas'),
+                onTap: () => _bukaModul(context, m18.MyApp()),
+              ),
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TugasPage5()),
-              );
-            },
-            child: const Text('Modul 5 tugas'),
+          ExpansionTile(
+            title: const Text('Modul 7'),
+            childrenPadding: const EdgeInsets.only(left: 16),
+            children: [
+              ListTile(
+                title: const Text('Tugas'),
+                onTap: () => _bukaModul(context, m19.MyApp()),
+              ),
+            ],
           ),
-
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pushNamed(context, '/modul6'); // pakai route
-            },
-            child: const Text('Modul 6'),
+          ExpansionTile(
+            title: const Text('Modul 8'),
+            childrenPadding: const EdgeInsets.only(left: 16),
+            children: [
+              ListTile(
+                title: const Text('Praktikum'),
+                onTap: () => _bukaModul(context, m20.MyApp()),
+              ),
+              ListTile(
+                title: const Text('Tugas'),
+                onTap: () => _bukaModul(context, m21.MyApp()),
+              ),
+            ],
           ),
-
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Modul7()),
-              );
-            },
-            child: const Text('Modul 7 Materialroute'),
+          ExpansionTile(
+            title: const Text('Modul 9'),
+            childrenPadding: const EdgeInsets.only(left: 16),
+            children: [
+              ExpansionTile(
+                title: const Text('Praktikum'),
+                childrenPadding: const EdgeInsets.only(left: 16),
+                children: [
+                  ListTile(
+                    title: const Text('Percobaan-1'),
+                    onTap: () => _bukaModul(context, m22.MyApp()),
+                  ),
+                  ListTile(
+                    title: const Text('Percobaan-2'),
+                    onTap: () => _bukaModul(context, m23.MyApp()),
+                  ),
+                ],
+              ),
+              ListTile(
+                title: const Text('Tugas'),
+                onTap: () => _bukaModul(context, m24.MyApp()),
+              ),
+            ],
           ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => HomeModul8()),
-              );
-            },
-            child: const Text('Modul 8'),
+          ExpansionTile(
+            title: const Text('Modul 10'),
+            childrenPadding: const EdgeInsets.only(left: 16),
+            children: [
+              ExpansionTile(
+                title: const Text('Praktikum'),
+                childrenPadding: const EdgeInsets.only(left: 16),
+                children: [
+                  ListTile(
+                    title: const Text('Percobaan-1'),
+                    onTap: () => _bukaModul(context, m25.MyApp()),
+                  ),
+                  ListTile(
+                    title: const Text('Percobaan-2'),
+                    onTap: () => _bukaModul(context, m26.MyApp()),
+                  ),
+                ],
+              ),
+              ListTile(
+                title: const Text('Tugas'),
+                onTap: () => _bukaModul(context, m27.MyApp()),
+              ),
+            ],
           ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Homemodul8practikum()),
-              );
-            },
-            child: const Text('Modul 8 Practikum'),
+          ExpansionTile(
+            title: const Text('Modul 11'),
+            childrenPadding: const EdgeInsets.only(left: 16),
+            children: [
+              ListTile(
+                title: const Text('Tugas'),
+                onTap: () => _bukaModul(context, m28.MyApp()),
+              ),
+            ],
           ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Modul9practikum()),
-              );
-            },
-            child: const Text('Modul 9 Practikum 1'),
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Modul9practikum2()),
-              );
-            },
-            child: const Text('Modul 9 Practikum 2'),
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Modul9tugas()),
-              );
-            },
-            child: const Text('Modul 9  tugas'),
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Modul10prac()),
-              );
-            },
-            child: const Text('Modul 10  practikum'),
-          ),
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Modul12()),
-              );
-            },
-            child: const Text('Modul 12  practikum'),
-          ),
-
-          const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => MyApp13()),
-              );
-            },
-            child: const Text('Modul 13  practikum'),
+          ExpansionTile(
+            title: const Text('UTS'),
+            childrenPadding: const EdgeInsets.only(left: 16),
+            children: [
+              ListTile(
+                title: const Text('Country Explorer'),
+                onTap: () => _bukaModul(context, m31.CountryExplorerApp()),
+              ),
+            ],
           ),
         ],
       ),

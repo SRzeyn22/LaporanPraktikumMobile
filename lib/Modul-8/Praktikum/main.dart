@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+import 'home.dart';
+import 'tujuan.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0081c9)),
+        useMaterial3: true,
+      ),
+
+      initialRoute: '/',
+
+      routes: {
+        '/': (context) => const Home(),
+        Tujuan.routeName: (context) => const Tujuan(),
+      },
+    );
+  }
+}
