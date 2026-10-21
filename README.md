@@ -28,6 +28,7 @@ LaporanPraktikumMobile/
 ├── linux/            # Konfigurasi untuk platform Linux
 ├── pubspec.yaml      # Manajer dependensi & konfigurasi paket
 └── README.md         # Dokumentasi proyek
+```
 
 ## Cara Menjalankan Proyek
 
@@ -62,4 +63,6 @@ Ikuti langkah-langkah berikut untuk menjalankan proyek ini di lingkungan lokal A
    flutter run
    ```
 
----
+- **Bahasa Pemrograman:** [Dart](https://dart.dev/)
+- **Framework:** [Flutter](https://flutter.dev/)
+* **GitHub:** [@SRZeyn22](https://github.com/SRZeyn22)
